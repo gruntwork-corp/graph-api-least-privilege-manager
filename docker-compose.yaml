@@ -1,0 +1,12 @@
+services:
+  manager:
+    environment:
+      - ARM_CLIENT_ID
+      - ARM_TENANT_ID
+      - ARM_CLIENT_SECRET
+      - IDENTIFIER_URI
+    build:
+      context: .
+      dockerfile: ./GraphApiLeastPrivilegeManager/Dockerfile
+    ports:
+      - "5467:80"

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphApiLeastPrivilegeManager", "GraphApiLeastPrivilegeManager\GraphApiLeastPrivilegeManager.csproj", "{DEDEA880-D2CA-47B2-8D98-0EB69C7FD207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphApiLeastPrivilegeManager.Tests", "GraphApiLeastPrivilegeManager.Tests\GraphApiLeastPrivilegeManager.Tests.csproj", "{16133001-E7DC-4C69-A165-97D793B5B7E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEDEA880-D2CA-47B2-8D98-0EB69C7FD207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEDEA880-D2CA-47B2-8D98-0EB69C7FD207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEDEA880-D2CA-47B2-8D98-0EB69C7FD207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEDEA880-D2CA-47B2-8D98-0EB69C7FD207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16133001-E7DC-4C69-A165-97D793B5B7E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16133001-E7DC-4C69-A165-97D793B5B7E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16133001-E7DC-4C69-A165-97D793B5B7E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16133001-E7DC-4C69-A165-97D793B5B7E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
