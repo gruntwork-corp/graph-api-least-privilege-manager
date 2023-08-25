@@ -1,8 +1,9 @@
 # Graph Least Privilege Manager App Registration and Service Principal
 
-This following [Terraform](https://developer.hashicorp.com/terraform/intro) scripts are designed to create an Azure Active Directory (Azure AD) application and its associated service principal.
+The following [Terraform](https://developer.hashicorp.com/terraform/intro) scripts are designed to create a Microsot Entra (formerAzure Active Directory (AAD)) application and its associated service principal.
 
-The app registration is configured with a single `scope` (allowing user- and service principal to acquire OAuth JWT access tokens), and multiple [roles](../README.md#groups) that will be utilised to to restrict access to endpoints. This will facilitate allowing principals to manage the lifecycle of groups they've created.
+The app registration is configured with a single `scope` (allowing user- and service principal to acquire OAuth JWT access tokens), and multiple [roles](../README.md#groups) that will be utilised to to restrict access to endpoints. \
+This will facilitate allowing principals to manage the lifecycle of groups they've created.
 
 The service principal is configured with a "elevated privilege": `Group.ReadWrite.All`. \
 This enables the service principal (representing the app registrations identity) to create, read, update and delete groups on behalf of principals who have been pre-authorized through [role](../README.md#groups) assignment.
