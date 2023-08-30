@@ -56,7 +56,7 @@ builder.Services.AddSwaggerGen(c =>
                 TokenUrl = new Uri($"https://login.microsoftonline.com/{Environment.GetEnvironmentVariable("ARM_TENANT_ID")}/oauth2/v2.0/token"),
                 Scopes = new Dictionary<string, string>
                 {
-                    { $"{identifierUri}/OAuthToken", "OAuth access token" }
+                    { $"{identifierUri}/user_impersonation", "OAuth access token" }
                 }
             }
         }

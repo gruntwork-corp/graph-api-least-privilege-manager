@@ -90,7 +90,7 @@ resource "azuread_application" "this" {
       type                       = "User"
       user_consent_display_name  = "Acquisition of OAuth token"
       user_consent_description   = "Allow Acquisition of OAuth token for principals"
-      value                      = "OAuthToken"
+      value                      = "user_impersonation"
     }
   }
 
