@@ -1,11 +1,11 @@
 # GraphApiLeastPrivilegeManager
 
-The problem we're trying to solve with this application stem from the fact that the the existing scopes in the Microsoft Graph API for managing Groups gives too much access. \
-The Groups.ReadWrite.All permission allows one to fully manage all aspects of groups (i.e. read/write/update/delete any group), hereunder create and delete groups, add and remove group members as well as administer group owners for any group. \
+The problem we're trying to solve with this application stem from the fact that the privileges tied to existing scopes in the Microsoft Graph API for managing Groups gives too wide access to your Microsoft Entra ID (former Azure Active Directory (AAD)) tenant, leaving you with highly privileged group management principals with potential enormous blast radius should credentials leak. \
+The Groups.ReadWrite.All permission, which is required to create new groups, allows one to fully manage all aspects of of all groups, hereunder create and delete groups, add and remove group members as well as administer group owners. \
 This is in most cases too wide a privilege for any single application in an organizational setting.
 
-The GraphApiLeastPrivilegeManager is a .NET Core 6 Web API application that provides an interface for managing groups in  Microsoft Entra (former Azure Active Directory (AAD)) according to the [principle of least privilege](https://www.paloaltonetworks.com/cyberpedia/what-is-the-principle-of-least-privilege). \
-It utilizes the Microsoft Graph API and Microsoft Entra for operations, authorization respectively. \
+The GraphApiLeastPrivilegeManager is a .NET Core 6 Web API application that provides an interface for managing groups in Microsoft Entra ID according to the [principle of least privilege](https://www.paloaltonetworks.com/cyberpedia/what-is-the-principle-of-least-privilege). \
+The solution utilizes a privileged service principal (Groups.ReadWrite.All) to perform synthetically delegated operations against the Microsoft Graph API on behalf of successful authentication principals, scoping authorization of actions by function of role assignments. \
 This application is designed following the least privilege principle and utilises application roles to ensure fine-grained access control.
 
 ## Least Privilege Implementation
@@ -20,15 +20,16 @@ With this app, we have implemented a pattern similar to the ".ReadWrite.OwnedBy"
 
 In our implementation, we have the following custom roles:
 
-- `Group.Read`: This role allows the application to get group information and list group members for authenticated principals.
-- `Group.ReadWriteControl.OwnedBy`: This role allows the application to:
+- `Group.Read`: This role allows the authenticated principal to get group information and list group members for any group.
+- `Group.ReadWriteControl.OwnedBy`: This role allows the authenticated principal to:
   - create groups.
   - update and delete groups where the authenticated principal is the owner.
-- `Group.ReadWriteMember.OwnedBy`: This role allows the application to add or remove members to/from groups where the authenticated principal is the owner.
-- `Group.ReadWriteOwner.OwnedBy`: This role allows the application to add or remove owners to/from groups where the authenticated principal is the owner.
-- `Group.ReadWrite.OwnedBy`: This role allows the application to perform all actions listed above on groups where the authenticated principal is the owner.
+- `Group.ReadWriteMember.OwnedBy`: This role allows the authenticated principal to add or remove members to/from groups where the principal is the owner.
+- `Group.ReadWriteOwner.OwnedBy`: This role allows the authenticated principal to add or remove owners to/from groups where the principal is the owner.
+- `Group.ReadWrite.OwnedBy`: This role allows the authenticated principal to perform all actions listed above on groups where the principal is the owner.
 
-When a group is created, the authenticated principal is automatically added as an owner. Only an owner can update or delete a group, add or remove members, and add or remove other owners. \
+When a group is created, the authenticated principal performing the create action is automatically added as a group owner (leaving no groups orphant). \
+Only an owner can, conditionally on role assignement, update or delete a group, add or remove members, and add or remove other owners. \
 This ensures that a user or service principal can only manage the groups they own, adhering to the least privilege principle.
 
 ![preview](./docs/architecture.drawio.svg)
